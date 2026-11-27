@@ -21,4 +21,4 @@ Only the functionalist families are addressable: global workspace, higher-order,
 7. **A sensorimotor sandbox and interoceptive allostasis.** A persistent space it acts in and predicts, and anticipatory regulation of its own budget.
 8. **Layered narrative, self-knowledge with evidence, and theory-of-mind predictions** about the people it talks to.
 
-Items 3 and 4 are being started before the first life. The rest come after.
+Before the first life: thoughts became recallable memories (part of item 3), curiosity now tracks real open questions (part of item 4), and blind self-report probes begin on day one, to support the test in item 1. The rest come after.

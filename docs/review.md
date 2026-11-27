@@ -17,13 +17,14 @@ Reviewers reproduced defects with throwaway scripts where they could. About 80 f
 | Durability | An unreachable replica disk crashed boot, and at runtime wrote a synced record every second while it was away. | Fixed |
 | Identity | A core re-signed with a substituted key booted normally, so anything able to write the home could rewrite the agent's values. | Fixed: the operator key is pinned in the journal |
 | Identity | `genesis` silently overwrote an existing operator key. | Fixed |
+| Privacy | A message marked private still reached cloud models on the next turn, through the attention workspace. Found by a new test. | Fixed: private records stay out of every cloud-bound prompt |
 | Spend | Failed attempts, retries and repairs were never charged, so the daily cap could be exceeded unseen. After a capped day, cloud models stayed blocked until restart. | Fixed: every call is metered |
 | Tools | Tool servers inherited every API key. Undrained stderr could hang them. Open-world "read" tools (web fetch) ran unapproved. | Fixed |
 | Affect | The mood was negative by construction: a three-hour conversation in which everything succeeded scored as badly as ten days alone. | Fixed: neutral rest, with deficits not masked |
 | Cognition | Curiosity was pinned at zero, and idle belief checks counted as sleep. One ambiguous claim jammed the idle mind. "Defer" was an unbounded model-call loop. | Fixed |
 | Cognition | After two or three quiet days the agent forgot the conversation: history was found by scanning back a fixed number of records. | Fixed: kind index |
-| Cognition | Commitments never closed. Disputed beliefs never resolved. A person's own update often could not replace their earlier statement. Different facts on one topic overwrote each other. | In progress |
-| Codex's work | A rollup failure aborted every later sleep. The signed-history check could be switched off by deleting one file. The drift flag could be silenced by the agent's narrator quoting a single character. The offline baseline numbers were constructed. | Partly fixed; the rest in progress |
+| Cognition | Commitments never closed. Disputed beliefs never resolved. A person's own update often could not replace their earlier statement. Different facts on one topic overwrote each other. | Fixed |
+| Codex's work | A rollup failure aborted every later sleep. The signed-history check could be switched off by deleting one file. The drift flag could be silenced by the agent's narrator quoting a single character. The offline baseline numbers were constructed. | Fixed; the baseline claim is withdrawn |
 
 ## The design self-critique, in brief
 
@@ -36,3 +37,11 @@ Reviewers reproduced defects with throwaway scripts where they could. About 80 f
   - every operator intervention recorded where the agent can see it;
   - blind self-report probes from day one;
   - a real identity core instead of the placeholder.
+
+## Also added before the first wake
+
+- **Replayable cognition.** Every model call is journaled with its exact messages, sampling parameters and raw output. Every wake records a digest of the running code.
+- **Objections.** The agent can raise an objection. The operator sees it until it is answered.
+- **Visible interventions.** A change to its code or configuration while it was down is recorded and stated when it wakes.
+- **Blind self-report probes, daily from day one.** "How are you?" is asked with no state readout in the prompt, and the answer is stored next to the state that was actually computed.
+- **Recallable thoughts.** Its own earlier thoughts can now be recalled, labelled as reflections rather than records of events.
