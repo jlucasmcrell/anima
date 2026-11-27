@@ -34,3 +34,7 @@ Time since recall, spaced repetition, importance, and measured arousal now influ
 ### Drift and character
 
 Weekly reviews compare recent behavior with available historical evidence and flag unexplained changes. Character revisions require supporting examples on three distinct nights. The agent can reconstruct its signed character file from its journal. Simulations exercised a month of reviews and a comparison window 90 days in the past.
+
+### Learning from tool outcomes
+
+Three successful similar requests can establish a provisional procedure. The agent offers matching steps to the planner and retires procedures after repeated failures. An offline MCP test followed the sequence from acquisition to retirement. The full suite passed 138 tests.
