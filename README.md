@@ -15,7 +15,7 @@ On restart the agent verifies its history, reconciles interrupted actions, and r
 | Foundation | Journal, recovery, replica fencing, encrypted archives, and model routing implemented. |
 | Memory and cognition | Sourced beliefs, commitments, attention, measured drives, identity checks, and sleep consolidation implemented. |
 | Tools and hardware | Tool approvals, hardware profiling, and a resource degradation ladder implemented. |
-| Hardening | Under development. The first milestone targets verified journal startup with 300,000 records and bounded index memory. |
+| Hardening | Offline queue completed. Real-model and cross-hardware evaluation remain open. |
 
 This repository publishes the design outline and milestone history. The implementation is maintained separately.
 
@@ -58,3 +58,7 @@ An operator can designate tools for use during idle work. Read-only tools can su
 ### Eight simulated weeks
 
 The offline experiment compared the full agent, six subsystem removals, and a persisted chat transcript. The full agent queued eight reminders on time and recovered an interrupted delivery without duplicating it. The baseline missed eight reminders and duplicated one delivery. Removing either the workspace or the commitment ledger lost all eight reminders. Four other removals produced no measurable difference on these mock-model metrics. Generalization to real models and hardware remains untested.
+
+### Operator visibility and continuity
+
+The local console reports tool names, action states, approval decisions, and resource pressure. An operator can declare an away or sleep window. A simulated battery transition triggered a priority checkpoint and reduced workload. An optional Windows logon task can start the supervisor. The current development queue is complete. Real-model ablations and a physical hardware matrix remain open.
