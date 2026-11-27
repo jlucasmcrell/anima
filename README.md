@@ -38,3 +38,7 @@ Weekly reviews compare recent behavior with available historical evidence and fl
 ### Learning from tool outcomes
 
 Three successful similar requests can establish a provisional procedure. The agent offers matching steps to the planner and retires procedures after repeated failures. An offline MCP test followed the sequence from acquisition to retirement. The full suite passed 138 tests.
+
+### Local semantic retrieval
+
+An optional loopback embedding model augments keyword and time retrieval. A background migration can query both model spaces as memories are re-embedded. Mock-model tests exercised migration and privacy routing. The offline suite passed 139 tests.
