@@ -26,3 +26,7 @@ The implementation now checks sealed journal segments and reads older record hea
 ### Resource pressure and recovery
 
 The agent can reduce the number of options it considers, prefer a cheaper qualified model, defer diary writing, and slow its tick under resource pressure. An offline test observed the cheaper model taking over and the original model returning as the pressure eased. The implementation suite passed 134 tests.
+
+### Memory rehearsal
+
+Time since recall, spaced repetition, importance, and measured arousal now influence which memories surface. Sleep can preserve a verified excerpt from a fading memory, with a reference back to its source. Tests verified ranking, replay, and resumption. All 135 offline tests passed, including the extended crash suite.
