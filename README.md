@@ -54,3 +54,7 @@ A two-gibibyte segmented journal was archived and revived with the same record c
 ### Tools between conversations
 
 An operator can designate tools for use during idle work. Read-only tools can supply observations. A proposed consequential action queues a question. A local test server demonstrated recovery of an interrupted effect through a keyed receipt lookup without repeating the write.
+
+### Eight simulated weeks
+
+The offline experiment compared the full agent, six subsystem removals, and a persisted chat transcript. The full agent queued eight reminders on time and recovered an interrupted delivery without duplicating it. The baseline missed eight reminders and duplicated one delivery. Removing either the workspace or the commitment ledger lost all eight reminders. Four other removals produced no measurable difference on these mock-model metrics. Generalization to real models and hardware remains untested.
