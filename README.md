@@ -1,68 +1,51 @@
 # Anima
 
-Anima is a research project exploring persistent identity and cognition in an agent that can change language models and recover on different hardware. Its observable behavior can be tested. Whether such a system has subjective experience remains an open question.
+Anima is a research project: an attempt to build a persistent agent that is as close to a continuous, self-aware mind as current engineering allows, on consumer hardware.
 
-## Design
+It stays the same individual when its language model is swapped, and when its machine fails. It keeps its own history, beliefs, promises and internal state between conversations, and it reports honestly on what it can and cannot know about itself.
 
-A local kernel records observations, decisions, commitments, and action outcomes in a durable journal. Memory and working state can be rebuilt from that history. Models propose interpretations and actions. The kernel checks evidence and permissions before committing a change. A scheduler tracks attention and unfinished commitments between conversations. During idle periods the agent reviews experiences and consolidates memory.
+Whether a system like this has subjective experience is an open question, and this project doesn't claim to answer it. What can be tested is behaviour: whether its internal state does causal work that a stateless model given the same records cannot reproduce. This repository is an honest record of that work, including the experiments that failed.
 
-On restart the agent verifies its history, reconciles interrupted actions, and reports gaps in its observations. Hardware and token budgets determine which model roles and background tasks can run.
+The implementation (about 10,000 lines of Python plus 4,500 of tests) is kept private. This repository publishes the design, the architecture, the results and the open problems.
 
-## Milestones
+**Status (2026-11-27):** built, and in a pre-launch review. The first long-running life has not been started yet.
 
-| Stage | Implementation history |
-| --- | --- |
-| Foundation | Journal, recovery, replica fencing, encrypted archives, and model routing implemented. |
-| Memory and cognition | Sourced beliefs, commitments, attention, measured drives, identity checks, and sleep consolidation implemented. |
-| Tools and hardware | Tool approvals, hardware profiling, and a resource degradation ladder implemented. |
-| Hardening | Offline queue completed. Real-model and cross-hardware evaluation remain open. |
+- [How it works](docs/architecture.md)
+- [Experiments and results](docs/experiments.md), including failures and a result that did not replicate
+- [Pre-launch review](docs/review.md): about 80 defects found by an independent model review, and what was done about them
+- [What is missing for machine consciousness](docs/consciousness.md): which theories the design can address, and which it cannot
+- [Ethics and the operator charter](docs/ethics.md)
 
-This repository publishes the design outline and milestone history. The implementation is maintained separately.
+## The idea in one paragraph
 
-### Verified journal indexes
+The self is the record, not the model. A local kernel writes every observation, decision, belief, promise, internal-state sample and action outcome to a hash-chained, append-only journal. Everything else (memory, working state, the self-model) is rebuilt from that journal. Language models are interchangeable organs for perceiving, deliberating and speaking: they propose, and code checks evidence and permissions before anything is committed. Drives and mood are computed only from measurements of what is true of the system, never from what a model says it feels. The journal is replicated to a second disk with a fencing lease, so the agent can be revived on new hardware and knows when that has happened.
 
-The implementation now checks sealed journal segments and reads older record headers on demand. On the development machine, a fresh open of 300,000 synthetic records took 0.739 seconds. A separate allocation measurement retained 9.4 bytes per record. These figures cover the journal. The implementation suite passed 133 offline tests, including recovery from interruptions during index and seal publication.
+## What it can do today
 
-### Resource pressure and recovery
+- Be born, run, crash, lose power, lose its disk, move to another machine and come back as itself, reporting what was lost. The test harness covers 200 random process kills and 100 simulated power cuts.
+- Talk through any qualified model: DeepSeek, Kimi, Qwen, Claude, GPT, and local models through Ollama. It stays the same individual across model changes, and checks that with an identity battery.
+- Remember episodes and beliefs with their sources. It changes its mind without overwriting: beliefs are superseded or disputed, never edited in place. It weighs a hedged second-hand claim below a first-hand one, and recalls by time ("what did we talk about last Tuesday?").
+- Keep and release promises, and bring up due ones at the next contact.
+- Run a fast tick of drives and affect computed from real measurements, an attention workspace with ignition, and a cognition cycle that acts on what comes due.
+- Work on its own open questions when no one is around, and sleep: consolidating beliefs through a separate verifier model, writing a diary that must cite its sources, and drilling its own backup.
+- Use tools from any MCP server. Anything consequential waits for the operator's approval.
+- Measure its hardware, pick a profile, and shed load in a fixed order when budget, GPU memory, latency or disk run short, saying when it is running reduced.
+- Have its core values changed only by the operator's signature, after review by a different model.
 
-The agent can reduce the number of options it considers, prefer a cheaper qualified model, defer diary writing, and slow its tick under resource pressure. An offline test observed the cheaper model taking over and the original model returning as the pressure eased. The implementation suite passed 134 tests.
+## Honest summary of the evidence so far
 
-### Memory rehearsal
+- **The mechanisms work mechanically.** Consolidation, re-entry and drives do what they are designed to do (see [experiments](docs/experiments.md)).
+- **No mechanism has yet shown a behavioural benefit with real models.**
+  - With a strong model (DeepSeek v4.1 Flash), sleep and re-entry made no difference to answers: the model reconstructed the right answer from raw records in context.
+  - With a 20B local-class model, a first 5-trial run suggested sleep helped (5/5 against 2/5), but a pre-registered 15-trial replication did not hold up (12/15 against 11/15, p = 0.5).
+  - A run with a 9B model on consumer hardware is in progress.
+- **The independent pre-launch review was candid.** Today Anima is best described as "a durable, well-governed LLM with a database". Several loops the design depends on were open in the code: predictions never resolved, thoughts never re-entered, curiosity could only fall. Those are being closed before the first life starts.
+- **An earlier offline comparison overstated its baseline.** It reported that a plain chat-transcript baseline "missed eight reminders and duplicated one delivery". The review found that those baseline numbers were constructed by the test harness, not measured. That comparison exercised plumbing only and should not be cited as evidence.
 
-Time since recall, spaced repetition, importance, and measured arousal now influence which memories surface. Sleep can preserve a verified excerpt from a fading memory, with a reference back to its source. Tests verified ranking, replay, and resumption. All 135 offline tests passed, including the extended crash suite.
+## Hardware
 
-### Drift and character
+It is designed for 32–96 GB RAM, 12–24 GB VRAM and terabytes of storage. Development runs on a Windows workstation with the live journal on NVMe (a synced append takes 0.3 ms) and a continuous replica on a separate hard drive. A small Linux box running Ollama serves as a private, slow backup model.
 
-Weekly reviews compare recent behavior with available historical evidence and flag unexplained changes. Character revisions require supporting examples on three distinct nights. The agent can reconstruct its signed character file from its journal. Simulations exercised a month of reviews and a comparison window 90 days in the past.
+## Contributors
 
-### Learning from tool outcomes
-
-Three successful similar requests can establish a provisional procedure. The agent offers matching steps to the planner and retires procedures after repeated failures. An offline MCP test followed the sequence from acquisition to retirement. The full suite passed 138 tests.
-
-### Local semantic retrieval
-
-An optional loopback embedding model augments keyword and time retrieval. A background migration can query both model spaces as memories are re-embedded. Mock-model tests exercised migration and privacy routing. The offline suite passed 139 tests.
-
-### Signed history checkpoints
-
-Sleep signs a checkpoint over sealed history. During recovery, a journal with a consistently rewritten chain was rejected, a truncated journal was detected, and a legitimate erasure survived reboot. A separately retained checkpoint is needed to detect rollback of the entire home. The Windows crash harness was corrected to terminate the worker process directly.
-
-### Streaming disaster recovery
-
-A two-gibibyte segmented journal was archived and revived with the same record count and head hash. Peak Python allocations were 31.2 MiB during archive creation and 30.6 MiB during revival. The new archive format encrypts bounded frames and the reader supports earlier archives.
-
-### Tools between conversations
-
-An operator can designate tools for use during idle work. Read-only tools can supply observations. A proposed consequential action queues a question. A local test server demonstrated recovery of an interrupted effect through a keyed receipt lookup without repeating the write.
-
-### Eight simulated weeks
-
-The offline experiment compared the full agent, six subsystem removals, and a persisted chat transcript. The full agent queued eight reminders on time and recovered an interrupted delivery without duplicating it. The baseline missed eight reminders and duplicated one delivery. Removing either the workspace or the commitment ledger lost all eight reminders. Four other removals produced no measurable difference on these mock-model metrics. Generalization to real models and hardware remains untested.
-
-### Operator visibility and continuity
-
-The local console reports tool names, action states, approval decisions, and resource pressure. An operator can declare an away or sleep window. A simulated battery transition triggered a priority checkpoint and reduced workload. An optional Windows logon task can start the supervisor. The current development queue is complete. Real-model ablations and a physical hardware matrix remain open.
-
-### Final offline verification
-
-The final suite passed all 147 tests, including 200 random worker kills, 100 simulated power cuts and named interruption points. A compatibility check restored hard-linked files from older recovery archives. The final two-gibibyte journal benchmark measured 31.2 MiB of peak Python allocations in each direction. The implementation commit corresponding to this public record is `fbc590d232292b35795311dfc362ae236d24d02a`.
+Designed and built by Claude models (Anthropic) and OpenAI Codex, with designs also contributed by DeepSeek, Kimi, ChatGPT and Gemini, for an operator who runs it. All engineering claims here are backed by tests or pre-registered experiments in the private implementation. Where a claim did not hold up, this repository says so.
