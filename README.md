@@ -62,3 +62,7 @@ The offline experiment compared the full agent, six subsystem removals, and a pe
 ### Operator visibility and continuity
 
 The local console reports tool names, action states, approval decisions, and resource pressure. An operator can declare an away or sleep window. A simulated battery transition triggered a priority checkpoint and reduced workload. An optional Windows logon task can start the supervisor. The current development queue is complete. Real-model ablations and a physical hardware matrix remain open.
+
+### Final offline verification
+
+The final suite passed all 147 tests, including 200 random worker kills, 100 simulated power cuts and named interruption points. A compatibility check restored hard-linked files from older recovery archives. The final two-gibibyte journal benchmark measured 31.2 MiB of peak Python allocations in each direction. The implementation commit corresponding to this public record is `fbc590d232292b35795311dfc362ae236d24d02a`.
