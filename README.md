@@ -42,3 +42,7 @@ Three successful similar requests can establish a provisional procedure. The age
 ### Local semantic retrieval
 
 An optional loopback embedding model augments keyword and time retrieval. A background migration can query both model spaces as memories are re-embedded. Mock-model tests exercised migration and privacy routing. The offline suite passed 139 tests.
+
+### Signed history checkpoints
+
+Sleep signs a checkpoint over sealed history. During recovery, a journal with a consistently rewritten chain was rejected, a truncated journal was detected, and a legitimate erasure survived reboot. A separately retained checkpoint is needed to detect rollback of the entire home. The Windows crash harness was corrected to terminate the worker process directly.
