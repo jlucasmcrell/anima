@@ -30,3 +30,7 @@ The agent can reduce the number of options it considers, prefer a cheaper qualif
 ### Memory rehearsal
 
 Time since recall, spaced repetition, importance, and measured arousal now influence which memories surface. Sleep can preserve a verified excerpt from a fading memory, with a reference back to its source. Tests verified ranking, replay, and resumption. All 135 offline tests passed, including the extended crash suite.
+
+### Drift and character
+
+Weekly reviews compare recent behavior with available historical evidence and flag unexplained changes. Character revisions require supporting examples on three distinct nights. The agent can reconstruct its signed character file from its journal. Simulations exercised a month of reviews and a comparison window 90 days in the past.
