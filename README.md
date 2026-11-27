@@ -22,3 +22,7 @@ This repository publishes the design outline and milestone history. The implemen
 ### Verified journal indexes
 
 The implementation now checks sealed journal segments and reads older record headers on demand. On the development machine, a fresh open of 300,000 synthetic records took 0.739 seconds. A separate allocation measurement retained 9.4 bytes per record. These figures cover the journal. The implementation suite passed 133 offline tests, including recovery from interruptions during index and seal publication.
+
+### Resource pressure and recovery
+
+The agent can reduce the number of options it considers, prefer a cheaper qualified model, defer diary writing, and slow its tick under resource pressure. An offline test observed the cheaper model taking over and the original model returning as the pressure eased. The implementation suite passed 134 tests.
