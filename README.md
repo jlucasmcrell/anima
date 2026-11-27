@@ -46,3 +46,7 @@ An optional loopback embedding model augments keyword and time retrieval. A back
 ### Signed history checkpoints
 
 Sleep signs a checkpoint over sealed history. During recovery, a journal with a consistently rewritten chain was rejected, a truncated journal was detected, and a legitimate erasure survived reboot. A separately retained checkpoint is needed to detect rollback of the entire home. The Windows crash harness was corrected to terminate the worker process directly.
+
+### Streaming disaster recovery
+
+A two-gibibyte segmented journal was archived and revived with the same record count and head hash. Peak Python allocations were 31.2 MiB during archive creation and 30.6 MiB during revival. The new archive format encrypts bounded frames and the reader supports earlier archives.
