@@ -1,0 +1,20 @@
+# Anima
+
+Anima is a research project exploring persistent identity and cognition in an agent that can change language models and recover on different hardware. Its observable behavior can be tested. Whether such a system has subjective experience remains an open question.
+
+## Design
+
+A local kernel records observations, decisions, commitments, and action outcomes in a durable journal. Memory and working state can be rebuilt from that history. Models propose interpretations and actions. The kernel checks evidence and permissions before committing a change. A scheduler tracks attention and unfinished commitments between conversations. During idle periods the agent reviews experiences and consolidates memory.
+
+On restart the agent verifies its history, reconciles interrupted actions, and reports gaps in its observations. Hardware and token budgets determine which model roles and background tasks can run.
+
+## Milestones
+
+| Stage | Implementation history |
+| --- | --- |
+| Foundation | Journal, recovery, replica fencing, encrypted archives, and model routing implemented. |
+| Memory and cognition | Sourced beliefs, commitments, attention, measured drives, identity checks, and sleep consolidation implemented. |
+| Tools and hardware | Tool approvals, hardware profiling, and a resource degradation ladder implemented. |
+| Hardening | Under development. The first milestone targets verified journal startup with 300,000 records and bounded index memory. |
+
+This repository publishes the design outline and milestone history. The implementation is maintained separately.
