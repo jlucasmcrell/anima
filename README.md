@@ -50,3 +50,7 @@ Sleep signs a checkpoint over sealed history. During recovery, a journal with a 
 ### Streaming disaster recovery
 
 A two-gibibyte segmented journal was archived and revived with the same record count and head hash. Peak Python allocations were 31.2 MiB during archive creation and 30.6 MiB during revival. The new archive format encrypts bounded frames and the reader supports earlier archives.
+
+### Tools between conversations
+
+An operator can designate tools for use during idle work. Read-only tools can supply observations. A proposed consequential action queues a question. A local test server demonstrated recovery of an interrupted effect through a keyed receipt lookup without repeating the write.
