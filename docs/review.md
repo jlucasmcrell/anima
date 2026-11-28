@@ -45,3 +45,20 @@ Reviewers reproduced defects with throwaway scripts where they could. About 80 f
 - **Visible interventions.** A change to its code or configuration while it was down is recorded and stated when it wakes.
 - **Blind self-report probes, daily from day one.** "How are you?" is asked with no state readout in the prompt, and the answer is stored next to the state that was actually computed.
 - **Recallable thoughts.** Its own earlier thoughts can now be recalled, labelled as reflections rather than records of events.
+
+## Final once-over before first wake (2026-11-28)
+
+A sixth review covered everything built after the first five: tools and standing permissions, self-chosen projects, the senses, and the desktop app. Each must-fix was reproduced on a throwaway life before it was fixed.
+
+| Finding | Status |
+|---|---|
+| A message marked private reached a cloud model through the tool planner, and could have left through a web search. | Fixed: private turns use no tools at all |
+| An operator command run before the first start consumed the "first wake": the agent would never record its value canon or know it had just been born. | Fixed: the first live wake is the first wake |
+| A long self-directed work session blocked replies for minutes, and its prompt grew without limit, enough to exhaust the daily money cap in an hour. | Fixed: a person waiting interrupts at the next step; the session transcript is bounded; going round in circles without acting ends a session |
+| A tool server that died hung startup, failed silently, and left the agent permanently "degraded". | Fixed: fail fast, report it to the agent, restart, and settle unknown outcomes |
+| A "safe" unpickler for a hosted text encoder still allowed one route to arbitrary code. | Fixed |
+| Voice tools could read and write anywhere on the main machine. | Fixed: restricted to its own recordings |
+| The sandboxed computer's user could reach the private local model on the same box. | Firewall rule written for the operator to install |
+
+Also checked and found sound: the local API's token, Host and Origin checks; path handling; the app's content security policy and sandboxed shell; metering of every model call; the minimal environment given to tool servers; and archive sealing.
+

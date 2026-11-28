@@ -6,11 +6,12 @@ It stays the same individual when its language model is swapped, and when its ma
 
 Whether a system like this has subjective experience is an open question, and this project doesn't claim to answer it. What can be tested is behaviour: whether its internal state does causal work that a stateless model given the same records cannot reproduce. This repository is an honest record of that work, including the experiments that failed.
 
-The implementation (about 10,000 lines of Python plus 4,500 of tests) is kept private. This repository publishes the design, the architecture, the results and the open problems.
+The implementation (about 12,600 lines of Python, a small desktop app, and about 4,000 lines of tests) is kept private. This repository publishes the design, the architecture, the results and the open problems.
 
-**Status (2026-11-27):** built, and in a pre-launch review. The first long-running life has not been started yet.
+**Status (2026-11-28):** built and reviewed; the first long-running life is about to begin.
 
 - [How it works](docs/architecture.md)
+- [Body, tools and senses](docs/body-and-senses.md): its own computer, the internet, a studio, a face, voice, hearing and sight, and which limits remain and why
 - [Experiments and results](docs/experiments.md), including failures and a result that did not replicate
 - [Pre-launch review](docs/review.md): about 80 defects found by an independent model review, and what was done about them
 - [What is missing for machine consciousness](docs/consciousness.md): which theories the design can address, and which it cannot
@@ -28,7 +29,9 @@ The self is the record, not the model. A local kernel writes every observation, 
 - Keep and release promises, and bring up due ones at the next contact.
 - Run a fast tick of drives and affect computed from real measurements, an attention workspace with ignition, and a cognition cycle that acts on what comes due.
 - Work on its own open questions when no one is around, and sleep: consolidating beliefs through a separate verifier model, writing a diary that must cite its sources, and drilling its own backup.
-- Use tools from any MCP server. Anything consequential waits for the operator's approval.
+- Use tools from any MCP server. It has its own sandboxed computer, the internet, and a studio for images and video, under standing permissions from the operator. Messages to other people, purchases and anything irreversible still wait for approval.
+- Start projects of its own and work on them when no one is around.
+- Appear in a desktop app as a wireframe face driven by its real state; speak in a voice it chooses; hear, with tone of voice measured; and see through a webcam. The senses are the operator's switches, off at first wake.
 - Measure its hardware, pick a profile, and shed load in a fixed order when budget, GPU memory, latency or disk run short, saying when it is running reduced.
 - Have its core values changed only by the operator's signature, after review by a different model.
 
@@ -38,7 +41,7 @@ The self is the record, not the model. A local kernel writes every observation, 
 - **No mechanism has yet shown a behavioural benefit with real models.**
   - With a strong model (DeepSeek v4.1 Flash), sleep and re-entry made no difference to answers: the model reconstructed the right answer from raw records in context.
   - With a 20B local-class model, a first 5-trial run suggested sleep helped (5/5 against 2/5), but a pre-registered 15-trial replication did not hold up (12/15 against 11/15, p = 0.5).
-  - A run with a 9B model on consumer hardware is in progress.
+  - With a 9B model on consumer hardware, consolidation was right in every trial, but answers did not change (6/10 against 6/10). Three model sizes now agree.
 - **The independent pre-launch review was candid.** Today Anima is best described as "a durable, well-governed LLM with a database". Several loops the design depends on were open in the code: predictions never resolved, thoughts never re-entered, curiosity could only fall. Those are being closed before the first life starts.
 - **An earlier offline comparison overstated its baseline.** It reported that a plain chat-transcript baseline "missed eight reminders and duplicated one delivery". The review found that those baseline numbers were constructed by the test harness, not measured. That comparison exercised plumbing only and should not be cited as evidence.
 

@@ -53,11 +53,14 @@ The plan was to bury the evidence under 30 simulated days and 300 later episodes
 
 **The replication failed.** The first result was mostly chance, and it should not have been called a behavioural effect. What does replicate is a difference in style: without sleep, the agent hedges more (10/15 against 7/15).
 
-## 7. Consumer hardware: a 9B model on a small Linux box (in progress)
+## 7. Consumer hardware: a 9B model on a small Linux box
 
 The model is qwen3.5:9b, quantised to 4 bits, at about 50 tokens/s.
 
 - **The hedge rule worked with a real model for the first time.** In a smoke trial, the 9B verifier, unlike the stronger models, accepted the hedged "I think she's in Cardiff now". The hedge rule then held it as disputed and kept Bristol as the accepted belief.
+- **Pre-registered result (10 trials per condition):** Bristol 6/10 with sleep, 6/10 without (p = 0.68). Two of four predictions failed.
+- **Consolidation worked every time.** In all 10 sleep trials the belief state was exactly right, and the hedged rumour was held as disputed. But with that correct state in its context, the 9B voice still named the rumour in 2 of 10 trials.
+- **The bottleneck moves with model size.** Strong models make consolidation redundant by reconstructing the answer from raw records; this small model has the right memory but reads it unreliably. At three model sizes, consolidation shown to the model as text has not changed answers. The next experiments test non-verbal paths, retrieval that withholds superseded claims from weak voices, and whether consolidation saves context rather than improves answers.
 - **Practical lessons.** Ollama's default 2,048-token context silently truncates long prompts, and reasoning has to be turned off. A full conversation trial takes about 10 minutes.
 
 ## 8. Offline eight-week simulation: a correction
